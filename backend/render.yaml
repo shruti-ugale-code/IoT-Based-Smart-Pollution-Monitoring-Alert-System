@@ -1,0 +1,27 @@
+# Render.com deployment configuration
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: pollution-monitoring-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn wsgi:app --bind 0.0.0.0:$PORT --workers 1 --threads 2 --timeout 120
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: AQICN_API_KEY
+        sync: false
+      - key: AQICN_CITY
+        value: pune
+      - key: SCHEDULER_TIMEZONE
+        value: Asia/Kolkata
+      - key: DATA_FETCH_INTERVAL_MINUTES
+        value: 10
+      - key: LOG_LEVEL
+        value: INFO
+      - key: FIREBASE_CREDENTIALS
+        sync: false
+    healthCheckPath: /health
