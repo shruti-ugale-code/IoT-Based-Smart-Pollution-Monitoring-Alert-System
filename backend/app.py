@@ -2,7 +2,7 @@
 Main Flask application for Smart Pollution Monitoring & Alert System.
 Production-ready backend with REST API endpoints, background jobs, and ML predictions.
 """
-
+import firebase_config
 import logging
 import os
 import sys

@@ -11,9 +11,16 @@ import 'screens/map_screen.dart';
 import 'screens/alerts_screen.dart';
 import 'screens/prediction_screen.dart';
 import 'screens/history_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   // Set preferred orientations
   await SystemChrome.setPreferredOrientations([
@@ -162,3 +169,5 @@ class PollutionMonitorApp extends StatelessWidget {
     );
   }
 }
+
+

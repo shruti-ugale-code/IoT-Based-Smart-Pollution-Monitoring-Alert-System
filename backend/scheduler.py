@@ -13,9 +13,18 @@ from apscheduler.triggers.interval import IntervalTrigger
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED
 
 from models import PollutionData, db
-from alerts import get_alert_manager
+from alerts import alert_manager, get_alert_manager
 
 logger = logging.getLogger(__name__)
+
+#trigger alert
+tokens = [t.token for t in DeviceToken.query.all()]
+
+send_alert(
+    "⚠ High Pollution Alert",
+    "AQI crossed safe limits in Pune",
+    tokens
+)
 
 # Global scheduler instance
 scheduler = None

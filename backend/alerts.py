@@ -13,6 +13,17 @@ from models import PollutionData, Alert, DeviceToken, db
 
 logger = logging.getLogger(__name__)
 
+
+def send_alert(title, body, tokens):
+    message = messaging.MulticastMessage(
+        notification=messaging.Notification(
+            title=title,
+            body=body
+        ),
+        tokens=tokens,
+    )
+    messaging.send_multicast(message)
+
 # Firebase Admin SDK - conditional import
 firebase_admin = None
 messaging = None

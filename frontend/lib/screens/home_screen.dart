@@ -5,6 +5,45 @@ import 'map_screen.dart';
 import 'alerts_screen.dart';
 import 'prediction_screen.dart';
 import 'history_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+@override
+void initState() {
+  super.initState();
+  registerDeviceToken();
+}
+
+Future<void> registerDeviceToken() async {
+  String? token = await FirebaseMessaging.instance.getToken();
+
+  print("Device Token: $token");
+
+  if (token != null) {
+    await http.post(
+      Uri.parse("https://your-backend-url.onrender.com/register-device"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({"token": token}),
+    );
+  }
+}
+
+@override
+void initState() {
+  super.initState();
+  registerDeviceToken();
+
+  FirebaseMessaging.onMessage.listen((message) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(message.notification?.title ?? ""),
+        content: Text(message.notification?.body ?? ""),
+      ),
+    );
+  });
+}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

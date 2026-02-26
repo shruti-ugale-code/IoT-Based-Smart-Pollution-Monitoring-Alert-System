@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "763365250072",
+    "project_id": "vayu-sutra",
+    "storage_bucket": "vayu-sutra.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763365250072:android:e73dd9ea4e99ce6b36df6d",
+        "android_client_info": {
+          "package_name": "com.pollutionmonitor.pollution_monitor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmXzHVHBeaEgOa5GXZ53d8ohWov9OOtY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
